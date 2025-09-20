@@ -14,7 +14,7 @@ const Card = ({ product }) => {
           <h2 class="product-name">${product.title}</h2>
           <p class="product-rating">
           ${product.rating}
-          <span class="material-symbols-outlined" style="color: gold;">star</span>
+          ⭐
           </p>
           <p class="product-price">$${product.price}</p>
         </div>
@@ -28,7 +28,7 @@ const Card = ({ product }) => {
   `;
 
   card.addEventListener('click', () => {
-    console.log('click en card');
+    window.location.hash = `#/product/${product.id}`;
   });
 
   return card;
