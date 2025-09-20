@@ -3,6 +3,8 @@ import { Blogs } from './pages/blogs/Blogs.js';
 import { Contacto } from './pages/contacto/Contacto.js';
 import { Nosotros } from './pages/nosotros/Nosotros.js';
 import { Productos } from './pages/productos/Productos.js';
+import { ProductDetail } from './pages/productos/ProductDetail.js';
+import { productsCache, loadProducts } from './globalState.js';
 
 const root = document.getElementById('content');
 
@@ -18,13 +20,14 @@ const routes = {
 async function router() {
   const hash = window.location.hash;
   root.innerHTML = `<p>Cargando...</p>`;
+  await loadProducts();
 
   if (hash.startsWith('#/product/')) {
     const id = parseInt(hash.split('/')[2]);
     const product = productsCache.find((p) => p.id === id);
 
+    root.innerHTML = '';
     if (product) {
-      root.innerHTML = '';
       root.appendChild(ProductDetail(product));
     } else {
       root.innerHTML = `<p>Producto no encontrado.</p>`;
