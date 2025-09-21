@@ -5,8 +5,11 @@ import { Nosotros } from './pages/nosotros/Nosotros.js';
 import { Productos } from './pages/productos/Productos.js';
 import { ProductDetail } from './pages/productos/ProductDetail.js';
 import { productsCache, loadProducts } from './globalState.js';
+import { CartOption } from './components/CartOption.js';
 
 const root = document.getElementById('content');
+const cartOptionContainer = document.getElementById('cart-option-container');
+cartOptionContainer.appendChild(CartOption());
 
 const routes = {
   '': Home,
@@ -15,6 +18,7 @@ const routes = {
   '#/about': Nosotros,
   '#/contact': Contacto,
   '#/blog': Blogs,
+  // '#/cart': Cart
 };
 
 async function router() {
