@@ -12,10 +12,10 @@ const cart = [];
 
 const addProduct = (newProduct) => {
   const index = findIndexOfProduct(newProduct.id);
-  if (index != 0) {
+  if (index !== null) {
     updateProductQuantity(newProduct.id, 1);
   } else {
-    cart.push(newProduct);
+    cart.push({ ...newProduct, quantity: 1 });
   }
 };
 
@@ -26,10 +26,12 @@ const removeProduct = (productId) => {
 };
 
 const updateProductQuantity = (productId, quantity) => {
-  const product = findIndexOfProduct(productId);
-  if (product === null) return;
-  cart[product].quantity = (cart[product].quantity || 0) + quantity;
-  if (cart[product].quantity <= 0) removeProduct(productId);
+  const index = findIndexOfProduct(productId);
+  if (index === null) return;
+
+  cart[index].quantity = quantity;
+
+  if (cart[index].quantity <= 0) removeProduct(productId);
 };
 
 const findIndexOfProduct = (id) => {
