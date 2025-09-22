@@ -1,0 +1,7 @@
+.nosotros-cuerpo {
+    background-color: var(--bg-normal);
+    border-radius: 5%;
+    width: 1200px;   /* mejor no exagerar con 3000px */
+    height: auto;    /* que crezca según el contenido */
+    padding: 30px;   /* espacio interno */
+}
