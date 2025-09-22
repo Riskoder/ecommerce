@@ -1,3 +1,5 @@
+import listOfCategories from "../utils/listOfCategories.js";
+
 export async function getProducts() {
   try {
     // Verificar si ya hay datos en localStorage
