@@ -5,7 +5,6 @@ const Card = ({ product }) => {
   const card = document.createElement('div');
   card.classList.add('card');
 
-  // Estructura base con innerHTML
   card.innerHTML = `
     <div class="card-flex-container">
       <!-- IMAGENES DEL PRODUCTO -->
@@ -25,13 +24,10 @@ const Card = ({ product }) => {
     </div>
   `;
 
-  // 🔑 Seleccionamos el contenedor de botones
   const btnsContainer = card.querySelector('.card-btns');
 
-  // Añadimos el botón dinámico (AddToCartBtn) correctamente
   btnsContainer.appendChild(AddToCartBtn(product));
 
-  // Navegación al hacer click en la tarjeta
   card.addEventListener('click', (e) => {
     if (e.target.closest('.card-btns')) return;
     window.location.hash = `#/product/${product.id}`;
