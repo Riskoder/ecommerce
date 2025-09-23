@@ -17,7 +17,9 @@ export const CartOption = () => {
 
   updateBadge();
 
-  setInterval(updateBadge, 300);
+  window.addEventListener('cartUpdated', updateBadge);
+
+  setInterval(updateBadge, 1000);
 
   return cartContainer;
 };
