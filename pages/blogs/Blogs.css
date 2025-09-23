@@ -1,6 +1,6 @@
 
 .border {
-    background-color: var(--bg-normal);
+    background-color: lightgray;
     width: 955px;
     height: 300px;
     box-sizing: border-box; 
@@ -19,6 +19,7 @@
     position: absolute;
     left: 180px;
     top: 40px;
+    background-color: white;
 }
 
 .linea{
