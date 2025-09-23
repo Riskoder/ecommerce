@@ -67,6 +67,15 @@ const getTotalProducts = () => {
   return cart.reduce((acc, item) => acc + item.quantity, 0);
 };
 
+const getProductTotal = (product) => {
+  const cartProduct = cart.find((item) => item.id === product.id);
+  if (!cartProduct) return 0;
+
+  const totalPrice = cartProduct.price * cartProduct.quantity;
+  const discount = (totalPrice * cartProduct.discountPercentage) / 100;
+  return Math.round((totalPrice - discount) * 100) / 100;
+};
+
 export {
   addProduct,
   removeProduct,
@@ -75,4 +84,5 @@ export {
   getCart,
   clearCart,
   getTotalProducts,
+  getProductTotal,
 };
