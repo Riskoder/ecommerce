@@ -12,6 +12,7 @@ export function Nosotros() {
     </div>
 
     <!-- Main Content -->
+    <div class="container">
     <div class="nosotros-main">
       <!-- About Section -->
       <section class="about-section">
@@ -135,6 +136,7 @@ export function Nosotros() {
           </a>
         </div>
       </section>
+    </div>
     </div>
   `;
 

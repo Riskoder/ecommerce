@@ -9,7 +9,7 @@ export function Contacto() {
         <p>¿Tienes alguna pregunta? Estamos aquí para ayudarte. Envíanos un mensaje y te responderemos lo antes posible.</p>
       </div>
     </div>
-
+    <div class="container">
     <div class="contact-main">
       <div class="contact-info">
         <div class="contact-card">
@@ -33,7 +33,7 @@ export function Contacto() {
             <span class="material-symbols-outlined">email</span>
           </div>
           <h3>Email</h3>
-          <p>info@stylepoint.com<br>soporte@stylepoint.com</p>
+          <p class="email-contact">info@stylepoint.com<br>soporte@stylepoint.com</p>
         </div>
 
         <div class="contact-card">
@@ -107,6 +107,7 @@ export function Contacto() {
           </form>
         </div>
       </div>
+    </div>
     </div>
   `;
 
