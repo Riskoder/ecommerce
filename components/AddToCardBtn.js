@@ -22,6 +22,8 @@ const AddToCartBtn = (product) => {
       quantity = 1;
       addProduct(product);
       render();
+      // Disparar evento para actualizar el carrito
+      window.dispatchEvent(new CustomEvent('cartUpdated'));
     });
 
     const controls = document.createElement('div');
@@ -39,6 +41,8 @@ const AddToCartBtn = (product) => {
         updateProductQuantity(product.id, 0);
       }
       render();
+      // Disparar evento para actualizar el carrito
+      window.dispatchEvent(new CustomEvent('cartUpdated'));
     });
 
     const qtySpan = document.createElement('span');
@@ -51,6 +55,8 @@ const AddToCartBtn = (product) => {
       quantity += 1;
       updateProductQuantity(product.id, quantity);
       render();
+      // Disparar evento para actualizar el carrito
+      window.dispatchEvent(new CustomEvent('cartUpdated'));
     });
 
     controls.append(minusBtn, qtySpan, plusBtn);
