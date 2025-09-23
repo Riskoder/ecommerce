@@ -1,25 +1,21 @@
 export function Home() {
   const container = document.createElement('div');
-  container.classList.add('container');
+  container.classList.add('hero-img');
 
   container.innerHTML = `
-  <section class= "border-home">
-      
-      <div class="linea-home">
-        <p>Creando nuevas tendencias</p>
-      </div>
-
-      <div class="pct">
-        <img 
-        src="assets/HEROIMAGE.png" 
-        alt="imagen del home" 
-        class="picture-home" 
-        height="300px" 
-        width="600px">
-      </div>
-      <a href="http://127.0.0.1:3000/ecommerce/index.html?serverWindowId=f7a6e821-841a-4fe6-927f-74b7c1aa9633#/products" "rel="noopener noreferrer">
-      <button class="add-btn btn-ver-productos">Ver productos</button>
+  <section class="border-home">
+    <img 
+      src="assets/HEROIMAGE.png" 
+      alt="StylePoint - Encuentra tu estilo único" 
+      class="picture-home">
+    
+    <div class="hero-content">
+      <h1>StylePoint</h1>
+      <p>Encuentra tu estilo único en StylePoint</p>
+      <a href="#/products">
+        <button class="btn-ver-productos">Ver productos</button>
       </a>
+    </div>
   </section>
   `;
 
