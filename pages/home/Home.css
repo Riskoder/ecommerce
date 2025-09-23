@@ -1,0 +1,58 @@
+.border-home{
+    background-color: var(--bg-normal);
+    width: 1000px;
+    height: 400px;
+    box-sizing: border-box; 
+    position: relative;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-color: 5px linear-gradient(
+    90deg,
+    var(--color-primario) 0%,
+    var(--color-muted) 100%
+  );
+}
+
+
+/* .noticia {
+    position: absolute;
+    left: 180px;
+    top: 40px;
+} */
+
+/* .linea{
+    position: absolute;
+    top: 100px;
+    word-break: break-all;
+    word-wrap: wrap;
+    padding: 12px 16px;
+    width: 50%;
+}
+
+.pct{
+    width: 10px;
+    height: 10px;
+    border-radius: 8px;
+    margin-top: 16px;
+}*/
+
+.picture-home{
+    width: 1000px;
+    height: 400px;
+    object-fit: fill;
+    position: absolute;
+    right: 0;
+    top: 0px;
+    border-radius: 12px;
+
+} 
+
+
+.btn-ver-productos{
+    position: absolute;
+    bottom: 20px;
+    width: 200px;
+    height: 60px;
+
+    left: 50px;
+} 
