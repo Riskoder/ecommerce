@@ -6,6 +6,7 @@ import { Productos } from './pages/productos/Productos.js';
 import { ProductDetail } from './pages/productos/ProductDetail.js';
 import { productsCache, loadProducts } from './globalState.js';
 import { CartOption } from './components/CartOption.js';
+import { Cart } from './pages/carritoCompras/Cart.js';
 
 const root = document.getElementById('content');
 const cartOptionContainer = document.getElementById('cart-option-container');
@@ -18,7 +19,7 @@ const routes = {
   '#/about': Nosotros,
   '#/contact': Contacto,
   '#/blog': Blogs,
-  // '#/cart': Cart
+  '#/cart': Cart,
 };
 
 async function router() {
