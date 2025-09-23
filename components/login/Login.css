@@ -1,0 +1,97 @@
+:root {
+  --color-primario: #007bff; /* azul primario */
+  --color-muted: #00c6ff; /* azul degradado */
+}
+
+/* Fondo blanco centrado */
+.container-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #fff;
+  font-family: "Segoe UI", sans-serif;
+  color: #000;
+}
+
+/* Caja gris clara */
+.login-box {
+  background: #f0f0f0;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 380px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease;
+}
+
+.login-box h1 {
+  margin-bottom: 0.5rem;
+}
+
+.login-box p {
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+/* Inputs */
+.login-box label {
+  display: block;
+  text-align: left;
+  font-size: 0.85rem;
+  margin: 0.5rem 0 0.2rem;
+}
+.login-box input {
+  width: 100%;
+  padding: 0.7rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  color: #000;
+}
+
+/* Botón degradado celeste */
+.login-box button {
+  width: 100%;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(90deg, var(--color-primario), var(--color-muted));
+  cursor: pointer;
+  transition: 0.2s;
+}
+.login-box button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Opciones */
+.options {
+  text-align: right;
+  margin-bottom: 1rem;
+}
+.options a {
+  color: var(--color-primario);
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+.options a:hover {
+  text-decoration: underline;
+}
+
+/* Animación */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
