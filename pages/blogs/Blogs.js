@@ -1,6 +1,6 @@
 export function Blogs() {
-  const container = document.createElement('div');
-  container.classList.add('container');
+  const container = document.createElement("div");
+  container.classList.add("container");
 
   container.innerHTML = `
   <h1>
@@ -89,5 +89,3 @@ export function Blogs() {
 
   return container;
 }
-
-

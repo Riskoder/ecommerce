@@ -1,9 +1,9 @@
-import { AddToCartBtn } from '../AddToCardBtn.js';
-import { getCart } from '../../pages/carritoCompras/cartLogic.js';
+import { AddToCartBtn } from "../AddToCardBtn.js";
+import { getCart } from "../../pages/carritoCompras/cartLogic.js";
 
 const Card = ({ product }) => {
-  const card = document.createElement('div');
-  card.classList.add('card');
+  const card = document.createElement("div");
+  card.classList.add("card");
 
   card.innerHTML = `
     <div class="card-flex-container">
@@ -24,12 +24,12 @@ const Card = ({ product }) => {
     </div>
   `;
 
-  const btnsContainer = card.querySelector('.card-btns');
+  const btnsContainer = card.querySelector(".card-btns");
 
   btnsContainer.appendChild(AddToCartBtn(product));
 
-  card.addEventListener('click', (e) => {
-    if (e.target.closest('.card-btns')) return;
+  card.addEventListener("click", (e) => {
+    if (e.target.closest(".card-btns")) return;
     window.location.hash = `#/product/${product.id}`;
   });
 
