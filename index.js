@@ -8,6 +8,7 @@ import { productsCache, loadProducts } from "./globalState.js";
 import { CartOption } from "./components/CartOption.js";
 import { Login } from "./components/login/Login.js";
 import { Cart } from "./pages/carritoCompras/Cart.js";
+import { Admin } from "./pages/admin/Admin.js";
 
 const root = document.getElementById("content");
 const cartOptionContainer = document.getElementById("cart-option-container");
@@ -22,10 +23,22 @@ const routes = {
   "#/blog": Blogs,
   "#/login": Login,
   "#/cart": Cart,
+  "#/admin": Admin,
 };
 
 async function router() {
   const hash = window.location.hash;
+  const header = document.querySelector("header.header");
+  const footer = document.querySelector("footer.footer");
+
+  // Ocultar layout público en vista de Admin
+  if (hash === "#/admin") {
+    if (header) header.style.display = "none";
+    if (footer) footer.style.display = "none";
+  } else {
+    if (header) header.style.display = "";
+    if (footer) footer.style.display = "";
+  }
   root.innerHTML = `<p>Cargando...</p>`;
   await loadProducts();
 
