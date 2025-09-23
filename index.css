@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 :root {
   /* Colores fondos */
@@ -29,12 +29,7 @@ html {
   display: flex;
   flex-direction: column;
   background-color: var(--bg-dark);
-  font-family: "Roboto";
-}
-
-#content {
-  padding-top: 12px;
-  padding-bottom: 12px;
+  font-family: 'Roboto';
 }
 
 .header {
@@ -53,6 +48,8 @@ html {
   margin-right: auto;
   padding-left: 2rem;
   padding-right: 2rem;
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
 
 .flex-container {
