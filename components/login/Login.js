@@ -181,28 +181,13 @@ export function Login() {
             nombre: user.nombre || user.email,
           })
         );
-
-        // Redireccionar después de una pequeña animación
-        setTimeout(() => {
-          window.location.hash = '#/admin';
-        }, 1500);
-      } else {
-        throw new Error('Credenciales incorrectas');
-      }
-    } catch (error) {
-      mensaje.textContent = error.message || 'Usuario o contraseña incorrectos';
-      mensaje.className = 'error';
-      submitBtn.disabled = false;
-      submitBtn.classList.remove('loading');
+        window.location.hash = "#/admin";
+      }, 1500);
+    } else {
+      mensaje.textContent = "❌ Usuario o contraseña incorrectos";
+      mensaje.style.color = "red";
     }
   });
-
-  // Cargar email recordado si existe
-  const rememberedEmail = localStorage.getItem('rememberedEmail');
-  if (rememberedEmail) {
-    emailInput.value = rememberedEmail;
-    container.querySelector('#remember').checked = true;
-  }
 
   return container;
 }

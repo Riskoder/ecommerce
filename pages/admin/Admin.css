@@ -1,0 +1,168 @@
+/* Layout principal del Admin */
+.container-admin {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 12px;
+  padding-bottom: 24px;
+}
+
+.container-admin h1 {
+  margin-bottom: 0.5rem;
+}
+
+.container-admin p {
+  color: var(--text-muted);
+}
+
+/* Acciones en cabecera del admin */
+.admin-actions {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-light);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0.4rem 0.7rem;
+  border-radius: 8px;
+}
+
+/* Navegación de pestañas */
+.admin-nav {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.admin-nav button {
+  background: var(--bg-light);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.admin-nav button:hover {
+  border-color: var(--color-muted);
+}
+
+/* Formulario de productos */
+.admin-form {
+  background: var(--bg-light);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.admin-form .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem 1rem;
+}
+
+.admin-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.admin-form label span {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.admin-form input,
+.admin-form select,
+.admin-form textarea {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: var(--bg-normal);
+  padding: 0.5rem 0.6rem;
+  border-radius: 8px;
+}
+
+.admin-form label.full {
+  grid-column: 1 / -1;
+}
+
+.image-preview-wrap {
+  display: flex;
+  align-items: center;
+  min-height: 120px;
+}
+
+.image-preview {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: var(--bg-normal);
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  margin-top: 0.75rem;
+}
+
+.form-actions button {
+  background: var(--color-primario);
+  color: white;
+  border: none;
+  padding: 0.5rem 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.form-actions .btn-secondary {
+  background: var(--color-muted);
+}
+
+/* Tabla de productos */
+.table-wrapper {
+  background: var(--bg-light);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table thead {
+  background: var(--bg-normal);
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  text-align: left;
+}
+
+.td-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.td-actions button {
+  background: var(--bg-normal);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.td-actions button:hover {
+  border-color: var(--color-muted);
+}

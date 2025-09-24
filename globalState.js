@@ -52,3 +52,30 @@ export function removeProductById(productId) {
   productsCache = productsCache.filter((p) => p.id !== productId);
   localStorage.setItem("products", JSON.stringify(productsCache));
 }
+
+// Actualizar producto por id con propiedades parciales
+export function updateProductById(productId, updates) {
+  let updated = false;
+  productsCache = productsCache.map((product) => {
+    if (product.id === productId) {
+      updated = true;
+      return { ...product, ...updates };
+    }
+    return product;
+  });
+  if (updated) {
+    localStorage.setItem("products", JSON.stringify(productsCache));
+  }
+  return updated;
+}
+
+// Generar un nuevo id incremental comenzando desde 200
+export function generateNewProductId() {
+  const currentMax = productsCache.reduce((maxId, product) => {
+    if (typeof product.id === "number" && product.id >= 200) {
+      return Math.max(maxId, product.id);
+    }
+    return maxId;
+  }, 199);
+  return currentMax + 1; // 200 si no hay anteriores >= 200
+}

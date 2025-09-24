@@ -6,7 +6,10 @@ import {
   loadProducts,
   addProduct,
   removeProductById,
+  updateProductById,
+  generateNewProductId,
 } from "../../globalState.js";
+import listOfCategories from "../../utils/listOfCategories.js";
 
 export async function Admin() {
   const container = document.createElement("div");
@@ -71,51 +74,167 @@ export async function Admin() {
   }
 
   function renderProducts() {
+    let selectedImageDataUrl = "";
     const rows = productsCache
       .map(
         (p) => `
       <tr>
         <td>${p.id}</td>
         <td>${p.title}</td>
-        <td>${p.price}</td>
-        <td><button class="btn-remove-product" data-id="${p.id}">Eliminar</button></td>
+        <td>$${Number(p.price).toFixed(2)}</td>
+        <td class="td-actions">
+          <button class="btn-edit-product" data-id="${p.id}">Editar</button>
+          <button class="btn-remove-product" data-id="${p.id}">Eliminar</button>
+        </td>
       </tr>
     `
       )
       .join("");
 
+    const categoryOptions = listOfCategories
+      .map((c) => `<option value="${c}">${c}</option>`)
+      .join("");
+
     content.innerHTML = `
       <h2>Productos</h2>
-      <form id="form-add-product">
-        <input type="text" id="title" placeholder="Título" required />
-        <input type="number" id="price" placeholder="Precio" required />
-        <button type="submit">Agregar</button>
+      <form id="form-product" class="admin-form">
+        <input type="hidden" id="id" />
+        <div class="grid">
+          <label>
+            <span>Título</span>
+            <input type="text" id="title" placeholder="Título" required />
+          </label>
+          <label>
+            <span>Precio</span>
+            <input type="number" id="price" placeholder="Precio" step="0.01" required />
+          </label>
+          <label>
+            <span>Categoría</span>
+            <select id="category" required>
+              <option value="" disabled selected>Selecciona</option>
+              ${categoryOptions}
+            </select>
+          </label>
+          <label class="full">
+            <span>Descripción</span>
+            <textarea id="description" placeholder="Descripción" rows="3"></textarea>
+          </label>
+          <label class="full">
+            <span>Imagen (URL)</span>
+            <input type="url" id="thumbnail" placeholder="https://..." />
+          </label>
+          <label class="full">
+            <span>Subir imagen</span>
+            <input type="file" id="imageFile" accept="image/*" />
+          </label>
+          <div class="full image-preview-wrap">
+            <img id="imagePreview" class="image-preview" alt="Vista previa" hidden />
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" id="submit-btn">Agregar</button>
+          <button type="button" id="cancel-edit" class="btn-secondary" hidden>Cancelar</button>
+        </div>
       </form>
-      <table>
-        <thead><tr><th>ID</th><th>Título</th><th>Precio</th><th></th></tr></thead>
-        <tbody>${rows || '<tr><td colspan="4">Sin productos</td></tr>'}</tbody>
-      </table>
+      <div class="table-wrapper">
+        <table class="admin-table">
+          <thead><tr><th>ID</th><th>Título</th><th>Precio</th><th>Acciones</th></tr></thead>
+          <tbody>${
+            rows || '<tr><td colspan="4">Sin productos</td></tr>'
+          }</tbody>
+        </table>
+      </div>
     `;
 
-    content
-      .querySelector("#form-add-product")
-      .addEventListener("submit", (e) => {
-        e.preventDefault();
-        const title = content.querySelector("#title").value.trim();
-        const price = parseFloat(content.querySelector("#price").value);
-        if (!title || isNaN(price)) return;
-        const newId = Date.now();
+    const form = content.querySelector("#form-product");
+    const cancelBtn = content.querySelector("#cancel-edit");
+    const fileInput = form.querySelector("#imageFile");
+    const imgPreview = form.querySelector("#imagePreview");
+
+    function resetForm() {
+      form.reset();
+      form.querySelector("#id").value = "";
+      form.querySelector("#submit-btn").textContent = "Agregar";
+      cancelBtn.hidden = true;
+      selectedImageDataUrl = "";
+      if (imgPreview) {
+        imgPreview.hidden = true;
+        imgPreview.removeAttribute("src");
+      }
+    }
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const idRaw = form.querySelector("#id").value;
+      const title = form.querySelector("#title").value.trim();
+      const price = parseFloat(form.querySelector("#price").value);
+      const category = form.querySelector("#category").value;
+      const description = form.querySelector("#description").value.trim();
+      const thumbnail = form.querySelector("#thumbnail").value.trim();
+
+      if (!title || isNaN(price) || !category) return;
+
+      if (idRaw) {
+        const id = parseInt(idRaw);
+        const ok = updateProductById(id, {
+          title,
+          price,
+          category,
+          description,
+          thumbnail: selectedImageDataUrl || thumbnail || "",
+          images: selectedImageDataUrl
+            ? [selectedImageDataUrl]
+            : thumbnail
+            ? [thumbnail]
+            : undefined,
+        });
+        if (ok) {
+          resetForm();
+        }
+      } else {
+        const newId = generateNewProductId();
         addProduct({
           id: newId,
           title,
           price,
-          category: "new",
-          images: [],
-          thumbnail: "",
-          description: "",
+          category,
+          images: selectedImageDataUrl
+            ? [selectedImageDataUrl]
+            : thumbnail
+            ? [thumbnail]
+            : [],
+          thumbnail: selectedImageDataUrl || thumbnail || "",
+          description: description || "",
         });
-        renderProducts();
-      });
+        resetForm();
+      }
+      renderProducts();
+    });
+
+    cancelBtn.addEventListener("click", () => {
+      resetForm();
+    });
+
+    fileInput.addEventListener("change", () => {
+      const file = fileInput.files && fileInput.files[0];
+      if (!file) {
+        selectedImageDataUrl = "";
+        if (imgPreview) {
+          imgPreview.hidden = true;
+          imgPreview.removeAttribute("src");
+        }
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = () => {
+        selectedImageDataUrl = String(reader.result || "");
+        if (selectedImageDataUrl && imgPreview) {
+          imgPreview.src = selectedImageDataUrl;
+          imgPreview.hidden = false;
+        }
+      };
+      reader.readAsDataURL(file);
+    });
 
     content.querySelectorAll(".btn-remove-product").forEach((btn) => {
       btn.addEventListener("click", (e) => {
@@ -124,6 +243,34 @@ export async function Admin() {
           removeProductById(id);
           renderProducts();
         }
+      });
+    });
+
+    content.querySelectorAll(".btn-edit-product").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const id = parseInt(e.currentTarget.getAttribute("data-id"));
+        const product = productsCache.find((p) => p.id === id);
+        if (!product) return;
+        form.querySelector("#id").value = product.id;
+        form.querySelector("#title").value = product.title || "";
+        form.querySelector("#price").value = product.price || "";
+        form.querySelector("#category").value = product.category || "";
+        form.querySelector("#description").value = product.description || "";
+        const existingThumb =
+          product.thumbnail || (product.images && product.images[0]) || "";
+        form.querySelector("#thumbnail").value = existingThumb;
+        if (existingThumb && imgPreview) {
+          selectedImageDataUrl = existingThumb;
+          imgPreview.src = existingThumb;
+          imgPreview.hidden = false;
+        } else if (imgPreview) {
+          selectedImageDataUrl = "";
+          imgPreview.hidden = true;
+          imgPreview.removeAttribute("src");
+        }
+        form.querySelector("#submit-btn").textContent = "Guardar";
+        cancelBtn.hidden = false;
+        window.scrollTo({ top: 0, behavior: "smooth" });
       });
     });
   }
