@@ -1,37 +1,67 @@
 /*
  LOGICA DEL CARRITO DE COMPRAS
- FUNCIONES QUE MODIFICAN EL CARRITO PRINCIPAL MUTANDOLO 
+ FUNCIONES QUE MODIFICAN EL CARRITO PRINCIPAL MUTANDOLO Y LO GUARDAN EN LOCALSTORAGE
  */
 
-/*
-TODO: 
-local storage para el cart 
-*/
+// Carga inicial del carrito desde localStorage
+const loadCartFromStorage = () => {
+  try {
+    const savedCart = localStorage.getItem('cart');
+    return savedCart ? JSON.parse(savedCart) : [];
+  } catch (error) {
+    console.error('Error loading cart from storage:', error);
+    return [];
+  }
+};
 
-const cart = [];
+// Guarda el carrito en localStorage
+const saveCartToStorage = (cart) => {
+  try {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  } catch (error) {
+    console.error('Error saving cart to storage:', error);
+  }
+};
+
+const cart = loadCartFromStorage();
 
 const addProduct = (newProduct) => {
   const index = findIndexOfProduct(newProduct.id);
   if (index !== null) {
-    updateProductQuantity(newProduct.id, 1);
+    updateProductQuantity(newProduct.id, cart[index].quantity + 1);
   } else {
     cart.push({ ...newProduct, quantity: 1 });
+    saveCartToStorage(cart);
   }
+  // Disparar evento para actualizar la UI
+  window.dispatchEvent(new CustomEvent('cartUpdated'));
 };
 
 const removeProduct = (productId) => {
-  const product = findIndexOfProduct(productId);
-  if (product === null) return;
-  cart.splice(product, 1);
+  const index = findIndexOfProduct(productId);
+  if (index === null) return;
+
+  cart.splice(index, 1);
+  saveCartToStorage(cart);
+
+  // Disparar evento para actualizar la UI
+  window.dispatchEvent(new CustomEvent('cartUpdated'));
 };
 
 const updateProductQuantity = (productId, quantity) => {
   const index = findIndexOfProduct(productId);
   if (index === null) return;
 
-  cart[index].quantity = quantity;
+  if (quantity <= 0) {
+    removeProduct(productId);
+    return;
+  }
 
-  if (cart[index].quantity <= 0) removeProduct(productId);
+  cart[index].quantity = quantity;
+  saveCartToStorage(cart);
+
+  // Disparar evento para actualizar la UI
+  window.dispatchEvent(new CustomEvent('cartUpdated'));
 };
 
 const findIndexOfProduct = (id) => {
@@ -61,6 +91,10 @@ const getCart = () => {
 
 const clearCart = () => {
   cart.length = 0;
+  saveCartToStorage(cart);
+
+  // Disparar evento para actualizar la UI
+  window.dispatchEvent(new CustomEvent('cartUpdated'));
 };
 
 const getTotalProducts = () => {
