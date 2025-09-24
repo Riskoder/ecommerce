@@ -1,12 +1,18 @@
 export function Blogs() {
   const container = document.createElement('div');
-  container.classList.add('container');
+  container.classList.add('blogs-container');
 
   container.innerHTML = `
-  <header class="blogs-hero" role="banner" aria-label="Sección de blog">
-    <h1 class="blogs-title">Blog y Novedades</h1>
-    <p class="blogs-subtitle">Artículos, tendencias y noticias del mundo de la moda.</p>
-  </header>
+  <!-- Hero Section -->
+  <div class="blogs-hero">
+    <div class="blogs-hero-content">
+      <h1>Blog y Novedades</h1>
+      <p>Descubre las últimas tendencias, consejos de estilo y noticias del mundo de la moda. Mantente al día con nuestros artículos exclusivos.</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container">
 
   <nav class="blogs-filters" aria-label="Filtros de categoría">
     <button class="chip is-active" type="button" aria-pressed="true" data-filter="all">Todo</button>
@@ -67,7 +73,7 @@ export function Blogs() {
       </div>
     </article>
   </section>
-
+  </div>
   `;
 
   const filterBar = container.querySelector('.blogs-filters');
