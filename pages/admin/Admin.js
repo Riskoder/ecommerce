@@ -25,6 +25,9 @@ export async function Admin() {
   <section>
     <h1>Panel de Administración</h1>
     <p>Bienvenido, <strong>${adminName}</strong></p>
+    <div class="admin-actions">
+      <a id="btn-back-home" class="btn-back" href="#/">← Volver al Home</a>
+    </div>
   </section>
 
   <section id="admin-sections">
@@ -97,52 +100,50 @@ export async function Admin() {
 
     content.innerHTML = `
       <h2>Productos</h2>
-      <form id="form-product" class="admin-form">
-        <input type="hidden" id="id" />
-        <div class="grid">
-          <label>
-            <span>Título</span>
-            <input type="text" id="title" placeholder="Título" required />
-          </label>
-          <label>
-            <span>Precio</span>
-            <input type="number" id="price" placeholder="Precio" step="0.01" required />
-          </label>
-          <label>
-            <span>Categoría</span>
-            <select id="category" required>
-              <option value="" disabled selected>Selecciona</option>
-              ${categoryOptions}
-            </select>
-          </label>
-          <label class="full">
-            <span>Descripción</span>
-            <textarea id="description" placeholder="Descripción" rows="3"></textarea>
-          </label>
-          <label class="full">
-            <span>Imagen (URL)</span>
-            <input type="url" id="thumbnail" placeholder="https://..." />
-          </label>
-          <label class="full">
-            <span>Subir imagen</span>
-            <input type="file" id="imageFile" accept="image/*" />
-          </label>
-          <div class="full image-preview-wrap">
-            <img id="imagePreview" class="image-preview" alt="Vista previa" hidden />
-          </div>
-        </div>
-        <div class="form-actions">
-          <button type="submit" id="submit-btn">Agregar</button>
-          <button type="button" id="cancel-edit" class="btn-secondary" hidden>Cancelar</button>
-        </div>
+      <form id=\"form-product\" class=\"admin-form\">\n\
+        <input type=\"hidden\" id=\"id\" />\n\
+        <label>\n\
+          <span>Título</span>\n\
+          <input type=\"text\" id=\"title\" placeholder=\"Título\" required />\n\
+        </label>\n\
+        <label>\n\
+          <span>Precio</span>\n\
+          <input type=\"number\" id=\"price\" placeholder=\"Precio\" step=\"0.01\" required />\n\
+        </label>\n\
+        <label>\n\
+          <span>Categoría</span>\n\
+          <select id=\"category\" required>\n\
+            <option value=\"\" disabled selected>Selecciona</option>\n\
+            ${categoryOptions}\n\
+          </select>\n\
+        </label>\n\
+        <label>\n\
+          <span>Descripción</span>\n\
+          <textarea id=\"description\" placeholder=\"Descripción\" rows=\"3\"></textarea>\n\
+        </label>\n\
+        <label>\n\
+          <span>Imagen (URL)</span>\n\
+          <input type=\"url\" id=\"thumbnail\" placeholder=\"https://...\" />\n\
+        </label>\n\
+        <label>\n\
+          <span>Subir imagen</span>\n\
+          <input type=\"file\" id=\"imageFile\" accept=\"image/*\" />\n\
+        </label>\n\
+        <div class=\"image-preview-wrap\">\n\
+          <img id=\"imagePreview\" class=\"image-preview\" alt=\"Vista previa\" hidden />\n\
+        </div>\n\
+        <div class=\"form-actions\">\n\
+          <button type=\"submit\" id=\"submit-btn\">Agregar</button>\n\
+          <button type=\"button\" id=\"cancel-edit\" class=\"btn-secondary\" hidden>Cancelar</button>\n\
+        </div>\n\
       </form>
-      <div class="table-wrapper">
-        <table class="admin-table">
-          <thead><tr><th>ID</th><th>Título</th><th>Precio</th><th>Acciones</th></tr></thead>
+      <div class=\"table-wrapper\">\n\
+        <table class=\"admin-table\">\n\
+          <thead><tr><th>ID</th><th>Título</th><th>Precio</th><th>Acciones</th></tr></thead>\n\
           <tbody>${
             rows || '<tr><td colspan="4">Sin productos</td></tr>'
-          }</tbody>
-        </table>
+          }</tbody>\n\
+        </table>\n\
       </div>
     `;
 
