@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="index.css" />
+    <link rel="icon" href="assets/logo.png" />
     <link
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
       rel="stylesheet"
@@ -46,9 +47,23 @@
           </nav>
           <!-- MENU DE OPCIONES USUARIO Y CARRITO -->
           <div class="menu-opciones">
-            <a href="#/login">
+            <a id="user-link" href="#/login">
               <span class="material-symbols-outlined">account_box</span>
+              <span id="user-name" style="margin-left: 6px"></span>
             </a>
+            <button
+              id="logout-btn"
+              style="
+                display: none;
+                border: none;
+                background: transparent;
+                cursor: pointer;
+                margin-left: 8px;
+              "
+              title="Salir"
+            >
+              <span class="material-symbols-outlined">logout</span>
+            </button>
             <div id="cart-option-container"></div>
           </div>
         </div>
@@ -85,10 +100,10 @@
         <div class="footer-payments">
           <h4>Métodos de pago</h4>
           <div class="payment-icons">
-            <img src="/assets/gpay.webp" alt="Google Pay" />
-            <img src="/assets/mastercard.webp" alt="Mastercard" />
-            <img src="/assets/paypal.webp" alt="PayPal" />
-            <img src="/assets/visa.webp" alt="Visa" />
+            <img src="assets/gpay.webp" alt="Google Pay" />
+            <img src="assets/mastercard.webp" alt="Mastercard" />
+            <img src="assets/paypal.webp" alt="PayPal" />
+            <img src="assets/visa.webp" alt="Visa" />
           </div>
         </div>
 
@@ -96,10 +111,10 @@
         <div class="footer-social">
           <h4>Síguenos</h4>
           <div class="social-icons">
-            <a href="#"><img src="/assets/facebook.svg" alt="Facebook" /></a>
-            <a href="#"><img src="/assets/github.svg" alt="GitHub" /></a>
-            <a href="#"><img src="/assets/instagram.svg" alt="Instagram" /></a>
-            <a href="#"><img src="/assets/twitter.svg" alt="Twitter" /></a>
+            <a href="#"><img src="assets/facebook.svg" alt="Facebook" /></a>
+            <a href="#"><img src="assets/github.svg" alt="GitHub" /></a>
+            <a href="#"><img src="assets/instagram.svg" alt="Instagram" /></a>
+            <a href="#"><img src="assets/twitter.svg" alt="Twitter" /></a>
           </div>
         </div>
       </div>

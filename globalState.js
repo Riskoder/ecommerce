@@ -7,8 +7,17 @@ export let usersCache = [];
 export async function loadProducts() {
   if (productsCache.length) return productsCache;
 
-  const data = await getProducts();
-  productsCache = data;
+  try {
+    const data = await getProducts();
+    productsCache = Array.isArray(data) ? data : [];
+  } catch (error) {
+    console.error(
+      "No se pudieron cargar los productos. Continuando sin datos.",
+      error
+    );
+    const stored = localStorage.getItem("products");
+    productsCache = stored ? JSON.parse(stored) : [];
+  }
 
   return productsCache;
 }

@@ -1,6 +1,6 @@
 export function Login() {
-  const container = document.createElement('div');
-  container.classList.add('container-login');
+  const container = document.createElement("div");
+  container.classList.add("container-login");
 
   container.innerHTML = `
     <div class="login-box">
@@ -50,44 +50,44 @@ export function Login() {
   // Usuarios base del sistema (si no existen en localStorage)
   const usuariosBase = [
     {
-      email: 'ra.fernandez@duocuc.cl',
-      password: '123',
-      nombre: 'Raúl Fernández',
-      rol: 'admin',
+      email: "ra.fernandez@duocuc.cl",
+      password: "123",
+      nombre: "Raúl Fernández",
+      rol: "admin",
     },
     {
-      email: 'ga.vidal@duocuc.cl',
-      password: '123',
-      nombre: 'Gabriel Vidal',
-      rol: 'admin',
+      email: "ga.vidal@duocuc.cl",
+      password: "123",
+      nombre: "Gabriel Vidal",
+      rol: "admin",
     },
   ];
 
   // Cargar/Inicializar usuarios en localStorage
   const usuarios = (() => {
-    const stored = localStorage.getItem('users');
+    const stored = localStorage.getItem("users");
     if (stored) return JSON.parse(stored);
-    localStorage.setItem('users', JSON.stringify(usuariosBase));
+    localStorage.setItem("users", JSON.stringify(usuariosBase));
     return usuariosBase;
   })();
 
-  const form = container.querySelector('#loginForm');
-  const emailInput = container.querySelector('#email');
-  const passwordInput = container.querySelector('#password');
-  const emailError = container.querySelector('#emailError');
-  const passwordError = container.querySelector('#passwordError');
-  const submitBtn = container.querySelector('#submitBtn');
-  const mensaje = container.querySelector('#loginMessage');
+  const form = container.querySelector("#loginForm");
+  const emailInput = container.querySelector("#email");
+  const passwordInput = container.querySelector("#password");
+  const emailError = container.querySelector("#emailError");
+  const passwordError = container.querySelector("#passwordError");
+  const submitBtn = container.querySelector("#submitBtn");
+  const mensaje = container.querySelector("#loginMessage");
 
   // Función de validación del email
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email) {
-      showError(emailInput, emailError, 'El correo electrónico es requerido');
+      showError(emailInput, emailError, "El correo electrónico es requerido");
       return false;
     }
     if (!emailRegex.test(email)) {
-      showError(emailInput, emailError, 'Ingrese un correo electrónico válido');
+      showError(emailInput, emailError, "Ingrese un correo electrónico válido");
       return false;
     }
     clearError(emailInput, emailError);
@@ -97,14 +97,14 @@ export function Login() {
   // Función de validación de la contraseña
   const validatePassword = (password) => {
     if (!password) {
-      showError(passwordInput, passwordError, 'La contraseña es requerida');
+      showError(passwordInput, passwordError, "La contraseña es requerida");
       return false;
     }
     if (password.length < 3) {
       showError(
         passwordInput,
         passwordError,
-        'La contraseña debe tener al menos 3 caracteres'
+        "La contraseña debe tener al menos 3 caracteres"
       );
       return false;
     }
@@ -114,7 +114,7 @@ export function Login() {
 
   // Función para mostrar errores
   const showError = (input, errorElement, message) => {
-    input.parentElement.classList.add('error');
+    input.parentElement.classList.add("error");
     errorElement.innerHTML = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none">
       <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 12c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1zm1-3H7V4h2v5z" fill="currentColor"/>
     </svg>${message}`;
@@ -122,22 +122,22 @@ export function Login() {
 
   // Función para limpiar errores
   const clearError = (input, errorElement) => {
-    input.parentElement.classList.remove('error');
-    errorElement.textContent = '';
+    input.parentElement.classList.remove("error");
+    errorElement.textContent = "";
   };
 
   // Validación en tiempo real del email
-  emailInput.addEventListener('input', () => {
+  emailInput.addEventListener("input", () => {
     validateEmail(emailInput.value.trim());
   });
 
   // Validación en tiempo real de la contraseña
-  passwordInput.addEventListener('input', () => {
+  passwordInput.addEventListener("input", () => {
     validatePassword(passwordInput.value.trim());
   });
 
   // Manejo del submit del formulario
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const email = emailInput.value.trim();
@@ -153,39 +153,53 @@ export function Login() {
 
     // Deshabilitar el botón y mostrar estado de carga
     submitBtn.disabled = true;
-    submitBtn.classList.add('loading');
-    mensaje.textContent = '';
+    submitBtn.classList.add("loading");
+    mensaje.textContent = "";
 
     try {
-      // Esto va a verificar al usuario si existe en el arrays
       const user = usuarios.find(
         (u) => u.email === email && u.password === password
       );
 
       if (user) {
-        mensaje.textContent = '¡Bienvenido! Redirigiendo...';
-        mensaje.className = 'success';
+        mensaje.textContent = "¡Bienvenido! Redirigiendo...";
+        mensaje.className = "success";
 
         // Guardar "remember me" si está marcado
-        if (container.querySelector('#remember').checked) {
-          localStorage.setItem('rememberedEmail', email);
+        if (container.querySelector("#remember").checked) {
+          localStorage.setItem("rememberedEmail", email);
         } else {
-          localStorage.removeItem('rememberedEmail');
+          localStorage.removeItem("rememberedEmail");
         }
 
         // Guardar usuario autenticado
         localStorage.setItem(
-          'currentUser',
+          "currentUser",
           JSON.stringify({
             email: user.email,
             nombre: user.nombre || user.email,
+            rol: user.rol || "user",
           })
         );
-        window.location.hash = "#/admin";
-      }, 1500);
-    } else {
-      mensaje.textContent = "❌ Usuario o contraseña incorrectos";
-      mensaje.style.color = "red";
+
+        setTimeout(() => {
+          if ((user.rol || "usuario") === "admin") {
+            window.location.hash = "#/admin";
+          } else {
+            window.location.hash = "#/";
+          }
+        }, 800);
+      } else {
+        mensaje.textContent = "Usuario o contraseña incorrectos";
+        mensaje.className = "error";
+      }
+    } catch (err) {
+      console.error("Error en login", err);
+      mensaje.textContent = "Ocurrió un error. Intenta nuevamente";
+      mensaje.className = "error";
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.classList.remove("loading");
     }
   });
 
