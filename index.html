@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="./components/login/Login.css" />
     <link rel="stylesheet" href="./pages/admin/Admin.css" />
     <link rel="stylesheet" href="./components/register/Register.css" />
+    <link rel="stylesheet" href="./components/ProfileMenu.css" />
     <title>StylePoint</title>
   </head>
   <body>
@@ -47,23 +48,10 @@
           </nav>
           <!-- MENU DE OPCIONES USUARIO Y CARRITO -->
           <div class="menu-opciones">
-            <a id="user-link" href="#/login">
-              <span class="material-symbols-outlined">account_box</span>
-              <span id="user-name" style="margin-left: 6px"></span>
-            </a>
-            <button
-              id="logout-btn"
-              style="
-                display: none;
-                border: none;
-                background: transparent;
-                cursor: pointer;
-                margin-left: 8px;
-              "
-              title="Salir"
-            >
-              <span class="material-symbols-outlined">logout</span>
-            </button>
+            <!-- Contenedor para el menú de perfil -->
+            <div id="profile-menu-container"></div>
+            
+            <!-- Contenedor para el carrito de compras -->
             <div id="cart-option-container"></div>
           </div>
         </div>

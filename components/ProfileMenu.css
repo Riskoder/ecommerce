@@ -1,0 +1,123 @@
+/* Contenedor principal del menú de perfil */
+.profile-menu {
+  position: relative;
+  display: inline-block;
+}
+
+/* Botón que activa el menú */
+.profile-menu-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.profile-menu-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.profile-menu-button .material-symbols-outlined {
+  font-size: 28px;
+  color: #333;
+}
+
+/* Contenido del menú desplegable */
+.profile-menu-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: #fff;
+  min-width: 220px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  z-index: 100;
+  padding: 8px 0;
+  margin-top: 8px;
+}
+
+/* Mostrar el menú cuando la clase 'show' está presente */
+.profile-menu-content.show {
+  display: block;
+}
+
+/* Encabezado del menú con información del usuario */
+.profile-menu-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 8px;
+}
+
+.profile-menu-header .user-name {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #333;
+  margin: 0;
+}
+
+.profile-menu-header .user-email {
+  font-size: 0.875rem;
+  color: #666;
+  margin: 4px 0 0;
+}
+
+/* Enlaces y botones dentro del menú */
+.profile-menu-content a,
+.profile-menu-content button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 16px;
+  text-decoration: none;
+  color: #333;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.profile-menu-content a .material-symbols-outlined,
+.profile-menu-content button .material-symbols-outlined {
+  margin-right: 12px;
+  font-size: 20px;
+  color: #555;
+}
+
+.profile-menu-content a:hover,
+.profile-menu-content button:hover {
+  background-color: #f5f5f5;
+}
+
+/* Separador en el menú */
+.profile-menu-divider {
+  height: 1px;
+  background-color: #f0f0f0;
+  margin: 8px 0;
+}
+
+#logout-btn {
+  color: #d9534f; /* Rojo para la opción de cerrar sesión */
+}
+
+#logout-btn .material-symbols-outlined {
+  color: #d9534f;
+}
+
+/* Estilos especiales para la vista de admin */
+body:has(#content .container-admin) .header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  position: relative;
+  z-index: 50;
+}
+
+/* Ajustar el contenido principal cuando hay header en admin */
+.container-admin {
+  margin-top: 0;
+  min-height: calc(100vh - 80px); /* Ajustar según la altura del header */
+}

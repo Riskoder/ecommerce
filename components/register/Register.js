@@ -245,11 +245,20 @@ export function Register() {
       usuarios.push(newUser);
       localStorage.setItem('users', JSON.stringify(usuarios));
 
+      // Iniciar sesión automáticamente
+      localStorage.setItem("currentUser", JSON.stringify({
+        email: newUser.email,
+        nombre: newUser.nombre,
+        rol: newUser.rol,
+      }));
+
       mensaje.textContent = '¡Cuenta creada con éxito! Redirigiendo...';
       mensaje.className = 'success';
 
       setTimeout(() => {
         window.location.hash = '#/';
+        // Disparar un evento de hashchange para que el router se actualice
+        window.dispatchEvent(new HashChangeEvent("hashchange"));
       }, 1500);
     } catch (error) {
       mensaje.textContent =
