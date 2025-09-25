@@ -84,9 +84,48 @@ async function router() {
   root.innerHTML = "";
   root.appendChild(content);
 }
-//FUNCIOENS PARA CAMBIAR DE VISTA
+//FUNCIONES PARA CAMBIAR DE VISTA
 window.addEventListener("hashchange", router);
 window.addEventListener("DOMContentLoaded", router);
+
+// Mobile menu functionality
+document.addEventListener("DOMContentLoaded", () => {
+  const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+  const navbar = document.getElementById("navbar");
+  
+  if (mobileMenuBtn && navbar) {
+    mobileMenuBtn.addEventListener("click", () => {
+      navbar.classList.toggle("show");
+      
+      // Change icon based on menu state
+      const icon = mobileMenuBtn.querySelector(".material-symbols-outlined");
+      if (navbar.classList.contains("show")) {
+        icon.textContent = "close";
+      } else {
+        icon.textContent = "menu";
+      }
+    });
+
+    // Close mobile menu when clicking on a link
+    const navLinks = navbar.querySelectorAll("a");
+    navLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        navbar.classList.remove("show");
+        const icon = mobileMenuBtn.querySelector(".material-symbols-outlined");
+        icon.textContent = "menu";
+      });
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!navbar.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+        navbar.classList.remove("show");
+        const icon = mobileMenuBtn.querySelector(".material-symbols-outlined");
+        icon.textContent = "menu";
+      }
+    });
+  }
+});
 
 // Función que crea el menú de perfil
 function ProfileMenu(user) {

@@ -71,6 +71,25 @@ html {
   gap: 2rem;
 }
 
+/* Mobile menu button */
+.mobile-menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.mobile-menu-btn:hover {
+  background-color: var(--bg-normal);
+}
+
+.mobile-menu-btn .material-symbols-outlined {
+  font-size: 24px;
+  color: var(--text-normal);
+}
+
 /* 
 SECCION DEL COMPONENTE CARD PARA PRODUCTS
 */
@@ -222,9 +241,214 @@ main {
   transform: scale(1.1);
 }
 
-@media (min-width: 640px) {
+/* Footer responsive improvements */
+@media (max-width: 768px) {
+  .footer {
+    padding: 1.5rem 1rem;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .footer-nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .footer-nav li {
+    margin-bottom: 0;
+  }
+
+  .payment-icons,
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .payment-icons img,
+  .social-icons img {
+    width: 35px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 1rem 0.75rem;
+  }
+
+  .footer-container {
+    gap: 1rem;
+  }
+
+  .footer h2 {
+    font-size: 1.5rem;
+  }
+
+  .footer h4 {
+    font-size: 1rem;
+  }
+
+  .footer-nav ul {
+    gap: 0.75rem;
+  }
+
+  .footer-nav a {
+    font-size: 0.9rem;
+  }
+
+  .payment-icons img,
+  .social-icons img {
+    width: 30px;
+  }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Mobile First Approach */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .flex-container {
+    justify-content: space-between;
+    align-items: center;
+    height: 4rem;
+    position: relative;
+  }
+
+  /* Show mobile menu button */
+  .mobile-menu-btn {
+    display: block !important;
+  }
+
+  /* Hide desktop navbar by default */
+  .navbar {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--bg-light);
+    flex-direction: column;
+    gap: 0;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    z-index: 100;
+  }
+
+  .navbar.show {
+    display: flex;
+  }
+
+  .navbar a {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--bg-normal);
+    text-align: center;
+  }
+
+  .navbar a:last-child {
+    border-bottom: none;
+  }
+
+  .menu-opciones {
+    gap: 1rem;
+  }
+
+  /* Cards responsive */
+  .card-container {
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .flex-container {
+    height: auto;
+    padding: 0.5rem 0;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 260px;
+    height: 360px;
+  }
+
+  .card-container {
+    gap: 0.75rem;
+  }
+
+  .product-name,
+  .product-price {
+    font-size: 18px;
+  }
+}
+
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1024px) {
   .container {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+  }
+
+  .card-container {
+    gap: 1.5rem;
+  }
+
+  .card {
+    width: 200px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .card-container {
+    gap: 2rem;
+  }
+
+  /* Ensure mobile menu button is hidden on desktop */
+  .mobile-menu-btn {
+    display: none !important;
+  }
+
+  /* Ensure navbar is visible on desktop */
+  .navbar {
+    display: flex !important;
+    position: static !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border-top: none !important;
+    padding: 0 !important;
+    flex-direction: row !important;
+  }
+
+  .navbar a {
+    padding: 0 !important;
+    border-bottom: none !important;
+    text-align: left !important;
   }
 }

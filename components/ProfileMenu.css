@@ -121,3 +121,84 @@ body:has(#content .container-admin) .header {
   margin-top: 0;
   min-height: calc(100vh - 80px); /* Ajustar según la altura del header */
 }
+
+/* ===== RESPONSIVE DESIGN FOR PROFILE MENU ===== */
+
+/* Mobile */
+@media (max-width: 768px) {
+  .profile-menu-content {
+    min-width: 200px;
+    right: -10px; /* Adjust position for mobile */
+  }
+
+  .profile-menu-header {
+    padding: 10px 14px;
+  }
+
+  .profile-menu-header .user-name {
+    font-size: 0.9rem;
+  }
+
+  .profile-menu-header .user-email {
+    font-size: 0.8rem;
+  }
+
+  .profile-menu-content a,
+  .profile-menu-content button {
+    padding: 8px 14px;
+    font-size: 0.9rem;
+  }
+
+  .profile-menu-content a .material-symbols-outlined,
+  .profile-menu-content button .material-symbols-outlined {
+    font-size: 18px;
+    margin-right: 10px;
+  }
+
+  .login-button {
+    padding: 6px 10px !important;
+    font-size: 0.85rem;
+  }
+
+  .login-button span:first-child {
+    margin-right: 6px !important;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .profile-menu-content {
+    min-width: 180px;
+    right: -5px;
+  }
+
+  .profile-menu-header {
+    padding: 8px 12px;
+  }
+
+  .profile-menu-header .user-name {
+    font-size: 0.85rem;
+  }
+
+  .profile-menu-header .user-email {
+    font-size: 0.75rem;
+  }
+
+  .profile-menu-content a,
+  .profile-menu-content button {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+
+  .login-button {
+    padding: 4px 8px !important;
+    font-size: 0.8rem;
+  }
+}
+
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .profile-menu-content {
+    min-width: 210px;
+  }
+}

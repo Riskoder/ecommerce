@@ -484,6 +484,8 @@ export async function Admin() {
     tabUsers.classList.remove('active');
     tabDashboard.classList.add('active');
     renderDashboard();
+    // Close mobile sidebar if open
+    closeMobileSidebar();
   });
 
   tabUsers?.addEventListener('click', () => {
@@ -491,6 +493,8 @@ export async function Admin() {
     tabDashboard.classList.remove('active');
     tabUsers.classList.add('active');
     renderUsers();
+    // Close mobile sidebar if open
+    closeMobileSidebar();
   });
 
   tabProducts?.addEventListener('click', () => {
@@ -498,6 +502,29 @@ export async function Admin() {
     tabDashboard.classList.remove('active');
     tabProducts.classList.add('active');
     renderProducts();
+    // Close mobile sidebar if open
+    closeMobileSidebar();
+  });
+
+  // Mobile menu toggle functionality
+  const menuToggle = container.querySelector('#menu-toggle');
+  const sidebar = container.querySelector('.admin-sidebar');
+  
+  function closeMobileSidebar() {
+    if (sidebar) {
+      sidebar.classList.remove('open');
+    }
+  }
+
+  menuToggle?.addEventListener('click', () => {
+    sidebar?.classList.toggle('open');
+  });
+
+  // Close sidebar when clicking outside on mobile
+  document.addEventListener('click', (e) => {
+    if (window.innerWidth <= 768 && sidebar && !sidebar.contains(e.target) && !menuToggle?.contains(e.target)) {
+      closeMobileSidebar();
+    }
   });
 
   // Vista inicial: Dashboard

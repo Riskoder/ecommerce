@@ -447,13 +447,20 @@
   color: #6b7280;
 }
 
-/* Media Queries */
+/* ===== RESPONSIVE DESIGN FOR ADMIN PANEL ===== */
+
+/* Large screens and tablets */
 @media (max-width: 1024px) {
   .admin-grid {
     grid-template-columns: 1fr;
   }
+
+  .dashboard-stats {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
 }
 
+/* Mobile and small tablets */
 @media (max-width: 768px) {
   .container-admin {
     grid-template-columns: 1fr;
@@ -465,32 +472,183 @@
   .admin-sidebar {
     position: fixed;
     left: -250px;
+    top: 0;
+    height: 100vh;
     transition: left 0.3s ease;
+    z-index: 1000;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
   }
 
   .admin-sidebar.open {
     left: 0;
   }
 
+  /* Add overlay when sidebar is open */
+  .admin-sidebar.open::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 250px;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+  }
+
   #menu-toggle {
     display: block;
   }
+
+  .admin-header {
+    padding: 0.75rem 1rem;
+  }
+
+  .admin-header-right {
+    gap: 0.5rem;
+  }
+
+  .admin-user-info {
+    padding: 0.25rem;
+  }
+
+  .admin-user-info span {
+    display: none; /* Hide username on mobile */
+  }
+
+  .breadcrumb {
+    font-size: 0.9rem;
+  }
+
+  /* Dashboard stats responsive */
+  .dashboard-stats {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* Tables responsive */
+  .admin-table {
+    font-size: 0.8rem;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    padding: 0.5rem 0.75rem;
+  }
+
+  /* Hide some table columns on mobile */
+  .admin-table th:nth-child(3),
+  .admin-table td:nth-child(3) {
+    display: none;
+  }
+
+  /* User and product info adjustments */
+  .user-info img,
+  .product-info img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .user-name,
+  .product-title {
+    font-size: 0.9rem;
+  }
+
+  .user-email,
+  .product-category {
+    font-size: 0.75rem;
+  }
 }
 
+/* Small mobile devices */
 @media (max-width: 480px) {
   .admin-main {
     padding: 1rem;
   }
 
+  .admin-section-header h2 {
+    font-size: 1.25rem;
+  }
+
   .stat-card {
+    padding: 1rem;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .stat-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .stat-value {
+    font-size: 1.25rem;
+  }
+
+  /* Forms responsive */
+  .admin-form {
     padding: 1rem;
   }
 
   .admin-form .grid {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .admin-form input,
+  .admin-form select,
+  .admin-form textarea {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  /* Buttons responsive */
+  .admin-btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
   }
 
   .td-actions {
     flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  /* Admin header adjustments */
+  .admin-header {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .admin-logo h1 {
+    font-size: 1rem;
+  }
+
+  /* Sidebar adjustments */
+  .admin-sidebar {
+    width: 220px;
+    padding: 1rem;
+  }
+
+  .admin-sidebar.open {
+    left: 0;
+  }
+
+  .admin-nav button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  /* Hide table columns on very small screens */
+  .admin-table th:nth-child(2),
+  .admin-table td:nth-child(2) {
+    display: none;
+  }
+
+  /* Make table scrollable horizontally */
+  .admin-card {
+    overflow-x: auto;
   }
 }
