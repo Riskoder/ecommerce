@@ -89,6 +89,15 @@ export function Register() {
       );
       return false;
     }
+    // Regex para validar nombres: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/
+    // ^ = inicio de cadena
+    // [a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+ = uno o más caracteres que sean:
+    //   - a-z: letras minúsculas
+    //   - A-Z: letras mayúsculas  
+    //   - áéíóúÁÉÍÓÚñÑ: vocales acentuadas y ñ (español)
+    //   - \s: espacios en blanco
+    // $ = final de cadena
+    // Función: Solo permite letras (incluye acentos españoles) y espacios
     if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(nombre)) {
       showError(
         nombreInput,
@@ -103,6 +112,15 @@ export function Register() {
 
   // Validación del email
   const validateEmail = (email) => {
+    // Regex para validar emails: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    // ^ = inicio de cadena
+    // [^\s@]+ = uno o más caracteres que NO sean espacios (\s) ni arrobas (@)
+    // @ = debe contener exactamente una arroba
+    // [^\s@]+ = uno o más caracteres que NO sean espacios ni arrobas (dominio)
+    // \. = debe contener un punto literal (escapado con \)
+    // [^\s@]+ = uno o más caracteres que NO sean espacios ni arrobas (extensión)
+    // $ = final de cadena
+    // Función: Valida formato básico de email (usuario@dominio.extension)
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email) {
       showError(emailInput, emailError, 'El correo electrónico es requerido');
@@ -142,6 +160,11 @@ export function Register() {
       );
       return false;
     }
+    // Regex para validar contraseña: /(?=.*\d)(?=.*[a-zA-Z])/
+    // (?=.*\d) = lookahead positivo que busca al menos un dígito (0-9)
+    // (?=.*[a-zA-Z]) = lookahead positivo que busca al menos una letra (a-z o A-Z)
+    // Los lookaheads (?=...) no consumen caracteres, solo verifican condiciones
+    // Función: Asegura que la contraseña tenga al menos una letra Y un número
     if (!/(?=.*\d)(?=.*[a-zA-Z])/.test(password)) {
       showError(
         passwordInput,

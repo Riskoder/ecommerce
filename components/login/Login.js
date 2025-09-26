@@ -81,6 +81,15 @@ export function Login() {
 
   // Función de validación del email
   const validateEmail = (email) => {
+    // Regex para validar emails: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    // ^ = inicio de cadena
+    // [^\s@]+ = uno o más caracteres que NO sean espacios (\s) ni arrobas (@)
+    // @ = debe contener exactamente una arroba
+    // [^\s@]+ = uno o más caracteres que NO sean espacios ni arrobas (dominio)
+    // \. = debe contener un punto literal (escapado con \)
+    // [^\s@]+ = uno o más caracteres que NO sean espacios ni arrobas (extensión)
+    // $ = final de cadena
+    // Función: Valida formato básico de email (usuario@dominio.extension)
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email) {
       showError(emailInput, emailError, "El correo electrónico es requerido");
